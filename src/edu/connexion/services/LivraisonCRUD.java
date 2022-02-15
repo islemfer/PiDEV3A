@@ -22,19 +22,19 @@ import java.util.List;
  */
 public class LivraisonCRUD {
 
-    Connection cnx2;
+    //Connection cnx2;
+   
+        //cnx2 = MyConnection.getInstance().getCnx();
     
-    public  LivraisonCRUD(){
-        cnx2 = MyConnection.getInstance().getCnx();
-    }
     public void addLivraison(GestiondeLivraison l) {
         try {
-            String request = "INSERT INTO GestiondeLivraison (nomlivreur,FraisdeLivraison) VALUES(?,?) ";
-            java.sql.PreparedStatement pst =cnx2.prepareStatement(request);
+            String request = "INSERT INTO GestiondeLivraison(IdCommande,NomLivreur,FraisdeLivraison) VALUES(?,?,?) ";
+            PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
              
-        pst.setString(1, l.getNomlivreur());
+        pst.setInt(1,l.getIdCommande());
+         pst.setString(2,l.getNomLivreur());
      
-        pst.setDouble(2, l.getFraisdeLivraison());
+        pst.setDouble(3,l.getFraisdeLivraison());
    
         pst.executeUpdate();
             System.out.println("la Livraison est ajouté! ");
@@ -43,13 +43,13 @@ public class LivraisonCRUD {
         }
 
     }
-    public void updateLivraison(GestiondeLivraison l,int x) {
+    public void updateLivraison(GestiondeLivraison l) {
         try {
-            String request = "UPDATE GestiondeLivraison Set nomlivreur = ?, FraisdeLivraison = ? where idCommande = ?  ";
-            PreparedStatement pst = cnx2.prepareStatement(request);
-            pst.setString(1, l.getNomlivreur());
+            String request = "UPDATE GestiondeLivraison Set NomLivreur = ?, FraisdeLivraison = ? where idCommande = ?  ";
+          PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
+            pst.setString(1, l.getNomLivreur());
             pst.setDouble(2, l.getFraisdeLivraison());
-            pst.setInt(3,x);
+            pst.setInt(3,l.getIdCommande());
             //pst.setInt(3, l.getIdCommande());
             pst.executeUpdate();
            System.out.println("Livraison modifié! ");
@@ -60,8 +60,8 @@ public class LivraisonCRUD {
        }}
     public void deleteLivraison(int x) {
         try {
-            String request = "DELETE FROM GestiondeLivraison  where idCommande = ?  ";
-            PreparedStatement pst = cnx2.prepareStatement(request);
+            String request = "DELETE FROM GestiondeLivraison  where IdCommande = ?  ";
+           PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
             pst.setInt(1, x);
             
             pst.executeUpdate();
@@ -72,7 +72,7 @@ public class LivraisonCRUD {
             System.err.println(ex.getMessage());
        }}
 
-   public List<GestiondeLivraison> DisplayLivraison() {
+  public List<GestiondeLivraison> DisplayLivraison() {
         List<GestiondeLivraison> myList = new ArrayList();
         try {
             String request = "Select * from GestiondeLivraison";
@@ -82,6 +82,7 @@ public class LivraisonCRUD {
             while (res.next()) {
                 GestiondeLivraison gl = new GestiondeLivraison();
                 gl.setIdCommande(res.getInt(1));
+                //gl.setIdLivreur(res.getInt(2));
                 gl.setNomlivreur(res.getString(2));
                 gl.setFraisdeLivraison(res.getDouble(3));
 

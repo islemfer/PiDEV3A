@@ -10,8 +10,8 @@ package edu.connexion.entities;
  * @author islemferchichi
  */
 public class GestiondeLivraison {
-    private int idCommande;
-    private String nomlivreur;
+    private int IdCommande;
+    private String NomLivreur;
     //private String TelClient;
     //private String adresse;
     private double FraisdeLivraison;
@@ -19,31 +19,31 @@ public class GestiondeLivraison {
     public GestiondeLivraison() {
     }
 
-    public GestiondeLivraison(int idCommande, String nomlivreur, double FraisdeLivraison) {
-        this.idCommande = idCommande;
-        this.nomlivreur = nomlivreur;
+    public GestiondeLivraison(int IdCommande,String NomLivreur, double FraisdeLivraison) {
+        this.IdCommande = IdCommande;
+        this.NomLivreur = NomLivreur;
         this.FraisdeLivraison = FraisdeLivraison;
     }
 
-    public GestiondeLivraison(String nomlivreur, double FraisdeLivraison) {
-        this.nomlivreur = nomlivreur;
+    public GestiondeLivraison(int IdCommande, double FraisdeLivraison) {
+        this.IdCommande = IdCommande;
         this.FraisdeLivraison = FraisdeLivraison;
     }
 
     public int getIdCommande() {
-        return idCommande;
+        return IdCommande;
     }
 
-    public void setIdCommande(int idCommande) {
-        this.idCommande = idCommande;
+    public void setIdCommande(int IdCommande) {
+        this.IdCommande = IdCommande;
     }
 
-    public String getNomlivreur() {
-        return nomlivreur;
+    public String getNomLivreur( ) {
+        return NomLivreur;
     }
 
-    public void setNomlivreur(String nomlivreur) {
-        this.nomlivreur = nomlivreur;
+    public void setNomlivreur(String NomLivreur ) {
+        this.NomLivreur = NomLivreur;
     }
 
     public double getFraisdeLivraison() {
@@ -56,7 +56,7 @@ public class GestiondeLivraison {
 
     @Override
     public String toString() {
-        return "GestiondeLivraison{" + "idCommande=" + idCommande + ", nomlivreur=" + nomlivreur + ", FraisdeLivraison=" + FraisdeLivraison + '}';
+        return "GestiondeLivraison{" + "IdCommande=" + IdCommande + ", NomLivreurr=" + NomLivreur + ", FraisdeLivraison=" + FraisdeLivraison + '}';
     }
 
        

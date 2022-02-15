@@ -20,16 +20,16 @@ import java.util.List;
  *
  * @author islemferchichi
  */
-public class LivreurCRUD {
-      Connection cnx2;
+//public class LivreurCRUD {
+     //Connection cnx2;
     
-    public  LivreurCRUD(){
-        cnx2 = MyConnection.getInstance().getCnx();
-    }
+    public class LivreurCRUD{
+        //cnx2 = MyConnection.getInstance().getCnx();
+    
     public void addLivreur(GestionLIVREUR glv) {
         try {
-            String request = "INSERT INTO ListeLivreur (IdLivreur,NomLivreur,prenomLivreur,telLivreur) VALUES(?,?,?,?) ";
-            java.sql.PreparedStatement pst =cnx2.prepareStatement(request);
+            String request = "INSERT INTO GestionLIVREUR (IdLivreur,NomLivreur,prenomLivreur,telLivreur) VALUES(?,?,?,?) ";
+            PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
              
            pst.setInt(1,glv.getIdLivreur());
      
@@ -51,7 +51,7 @@ public class LivreurCRUD {
     public void updateLivreur(GestionLIVREUR glv) {
         try {
             String request = "UPDATE GestionLIVREUR Set IdLivreur = ?,NomLivreur = ?,prenomLivreur = ? where idLivreur = ?  ";
-            PreparedStatement pst = cnx2.prepareStatement(request);
+            PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
             pst.setInt(1,glv.getIdLivreur());
      
            pst.setString(2,glv.getNomLivreur());
@@ -69,8 +69,8 @@ public class LivreurCRUD {
        }}
     public void deleteLivreur(int IdLivreur) {
         try {
-            String request = "DELETE FROM ListeLivreur  where IdLivreur = ?  ";
-            PreparedStatement pst = cnx2.prepareStatement(request);
+            String request = "DELETE FROM GestionLIVREUR  where IdLivreur = ?  ";
+            PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
             pst.setInt(1, IdLivreur);
             
             pst.executeUpdate();
@@ -84,7 +84,7 @@ public class LivreurCRUD {
    public List<GestionLIVREUR> DisplayLivreur() {
         List<GestionLIVREUR> myList = new ArrayList();
         try {
-            String request = "Select * from ListeLivreur";
+            String request = "Select * from GestionLIVREUR";
             Statement st = MyConnection.getInstance().getCnx().createStatement();
             ResultSet res = st.executeQuery(request);
 
