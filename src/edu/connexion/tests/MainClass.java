@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package edu.connexion.tests;
+
 import edu.connexion.entities.GestiondeLivraison;
-import edu.connexion.entities.GestionLIVREUR;
+import edu.connexion.entities.Livraison;
+import edu.connexion.entities.Livreur;
 import edu.connexion.services.LivraisonCRUD;
 import edu.connexion.services.LivreurCRUD;
 import edu.connexion.utils.MyConnection;
+import static java.nio.file.Files.list;
+import static java.util.Collections.list;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.text.Document;
@@ -18,44 +22,45 @@ import javax.swing.text.Document;
  * @author islemferchichi
  */
  public class MainClass {
-    public static void main(String[]args){
+ public static void main(String[]args){
         
     
    MyConnection mc = MyConnection.getInstance();   
-    MyConnection mc2 = MyConnection.getInstance();  
+   MyConnection mc2 = MyConnection.getInstance();  
    System.out.println(mc.hashCode()+" - "+mc2.hashCode());
     LivraisonCRUD lcd = new LivraisonCRUD();
-    GestiondeLivraison l=new GestiondeLivraison(254,"samir",50);
+    //Livraison l4=new Livraison(1,812,"",40);
     //GestiondeLivraison l1=new GestiondeLivraison(222,"samir",30);
-    //GestiondeLivraison l2=new GestiondeLivraison(444,"bader",80);
-    //lcd.addLivraison(l);
+     Livraison l  =new Livraison(8,90,80);
+    lcd.addLivraison(l);
     //lcd.deleteLivraison(444);
-     lcd.updateLivraison(l);
-     List<GestiondeLivraison>listLivrai = lcd.DisplayLivraison();
-     for(GestiondeLivraison gl:listLivrai)
+     //lcd.updateLivraison(l);
+  
+     List<Livraison>ListLivraison= lcd.DisplayLivraison();
+     for(Livraison gl:ListLivraison)
      {
          System.out.println(gl);    
     
-   //GestionLIVREUR e= new GestionLIVREUR(808,"mounir","mounir",52333777);
-   //GestionLIVREUR e1= new GestionLIVREUR(808,"samir","sair",52333888);
-  //GestionLIVREUR e2= new GestionLIVREUR(808,"bader","bader",52333999);
-   //LivreurCRUD lc = new LivreurCRUD();
+   Livreur e5= new Livreur(1,"bom","bom",52333523);
+    //Livreur e1= new Livreur(803,"samir","samir",52333888);
+   Livreur e3= new Livreur(90,"Monji","karmbader",52444444);
+   LivreurCRUD lc = new LivreurCRUD();
+    //lc.updateLivreur(e1);
+   //lc.addLivreur(e5);
+    //lc.updateLivreur(e);
+    //lc.deleteLivreur(8100); 
     
-   // lc.addLivreur(e);
-   // lc.updateLivreur(e);
-   // lc.deleteLivreur(e); 
-    
-   //List<GestionLIVREUR>listLiveur = lc.DisplayLivreur();
+   List<Livreur>listLiveur = lc.DisplayLivreur();
    
-     //for(GestionLIVREUR kk:listLiveur)
+     for(Livreur a:listLiveur)
      
-     //{
-     //    System.out.println(kk);
-    //}
-    
+     {
+         System.out.println(e3);
+    }
+     }}}
 
 
-{Scanner clavier=new Scanner(System.in);
+/*{Scanner clavier=new Scanner(System.in);
         double HT=0,tva=0,r=0,netc=0,ttc=0;
         System.out.println("entrer N");
            int n=clavier.nextInt();
@@ -74,9 +79,9 @@ import javax.swing.text.Document;
     System.out.println("le montant est" +HT+"dinars");
     System.out.println("La remise 1% est"+r+"dinars");
     System.out.println("net commercial est"+netc+"dinars");
-    System.out.println("TVA est"+tva+"dinars");
+    System.out.println("TVA est"+tva+"dinars");*/
 
-     }}}}
+     //}}}}
   
 
 

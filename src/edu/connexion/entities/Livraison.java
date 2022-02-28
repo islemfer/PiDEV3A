@@ -9,31 +9,24 @@ package edu.connexion.entities;
  *
  * @author islemferchichi
  */
-public class GestiondeLivraison {
-    //private int IdCommande;
+  
+public class Livraison {
     private int IdLivraison;
     private int IdLivreur;
-    private String NomLivreur;
     //private String TelClient;
     //private String adresse;
     private double FraisdeLivraison;
 
-    public GestiondeLivraison() {
+    public Livraison() {
     }
 
-    public GestiondeLivraison(int IdLivraison,int IdLivreur,String NomLivreur, double FraisdeLivraison) {
+    public Livraison(int IdLivraison,int IdLivreur, double FraisdeLivraison) {
         this.IdLivraison = IdLivraison;
          this.IdLivreur = IdLivreur;
         
-        this.NomLivreur = NomLivreur;
         this.FraisdeLivraison = FraisdeLivraison;
     }
 
-    public GestiondeLivraison(int IdLivraison,int IdLivreur,double FraisdeLivraison) {
-        this.IdLivraison = IdLivraison;
-         this.IdLivreur = IdLivreur;
-        this.FraisdeLivraison = FraisdeLivraison;
-    }
 
     public int getIdLivraison() {
         return IdLivraison;
@@ -51,14 +44,7 @@ public class GestiondeLivraison {
         this.IdLivreur = IdLivreur;
     }
 
-    public String getNomLivreur() {
-        return NomLivreur;
-    }
-
-    public void setNomLivreur(String NomLivreur) {
-        this.NomLivreur = NomLivreur;
-    }
-
+  
     public double getFraisdeLivraison() {
         return FraisdeLivraison;
     }
@@ -69,8 +55,11 @@ public class GestiondeLivraison {
 
     @Override
     public String toString() {
-        return "GestiondeLivraison{" + "IdLivraison=" + IdLivraison + ", IdLivreur=" + IdLivreur + ", NomLivreur=" + NomLivreur + ", FraisdeLivraison=" + FraisdeLivraison + '}';
+        return "GestiondeLivraison{" + "IdLivraison=" + IdLivraison + ", IdLivreur=" + IdLivreur + ", FraisdeLivraison=" + FraisdeLivraison + '}';
     }
 
         
 }
+
+    
+

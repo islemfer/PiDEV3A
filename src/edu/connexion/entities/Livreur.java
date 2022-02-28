@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-//test
 package edu.connexion.entities;
+
+import javafx.scene.control.TableColumn;
 
 /**
  *
  * @author islemferchichi
  */
-public class GestionLIVREUR {
+public class Livreur {
+    
+
     
 
 
@@ -20,13 +22,26 @@ public class GestionLIVREUR {
     public String prenomLivreur;
     public int telLivreur; 
     
-   public GestionLIVREUR(){
+   public Livreur(){}
+       public Livreur(int IdLivreur){
+           this.IdLivreur = IdLivreur;
    }
-    public GestionLIVREUR(int IdLivreur, String NomLivreur, String prenomLivreur, int telLivreur) {
+   
+    public Livreur(int IdLivreur, String NomLivreur, String prenomLivreur) {
+        this.IdLivreur = IdLivreur;
+        this.NomLivreur = NomLivreur;
+        this.prenomLivreur = prenomLivreur;
+       
+    }
+    public Livreur(int IdLivreur, String NomLivreur, String prenomLivreur, int telLivreur) {
         this.IdLivreur = IdLivreur;
         this.NomLivreur = NomLivreur;
         this.prenomLivreur = prenomLivreur;
         this.telLivreur = telLivreur;
+    }
+
+    public Livreur(TableColumn<Livreur, Integer> Id, TableColumn<Livreur, String> Nom, TableColumn<Livreur, String> Prenom, TableColumn<Livreur, Integer> Tel) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdLivreur() {
@@ -63,8 +78,7 @@ public class GestionLIVREUR {
 
     @Override
     public String toString() {
-        return "ListeLivreur{" + "IdLivreur=" + IdLivreur + ", NomLivreur=" + NomLivreur + ", prenomLivreur=" + prenomLivreur + ", telLivreur=" + telLivreur + '}';
+        return String.valueOf(IdLivreur) ;
     }
-    
 }
-
+   

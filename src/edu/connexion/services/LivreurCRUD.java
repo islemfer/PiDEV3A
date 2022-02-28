@@ -6,7 +6,7 @@
 package edu.connexion.services;
 
 
-import edu.connexion.entities.GestionLIVREUR;
+import edu.connexion.entities.Livreur;
 import edu.connexion.utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,9 +26,9 @@ import java.util.List;
     public class LivreurCRUD{
         //cnx2 = MyConnection.getInstance().getCnx();
     
-    public void addLivreur(GestionLIVREUR glv) {
+    public void addLivreur(Livreur glv) {
         try {
-            String request = "INSERT INTO GestionLIVREUR (IdLivreur,NomLivreur,prenomLivreur,telLivreur) VALUES(?,?,?,?) ";
+            String request = "INSERT INTO Livreur (IdLivreur,NomLivreur,prenomLivreur,telLivreur) VALUES(?,?,?,?) ";
             PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
              
            pst.setInt(1,glv.getIdLivreur());
@@ -48,19 +48,21 @@ import java.util.List;
         }
 
     }
-    public void updateLivreur(GestionLIVREUR glv) {
+    public void updateLivreur(Livreur glv) {
         try {
-            String request = "UPDATE GestionLIVREUR Set IdLivreur = ?,NomLivreur = ?,prenomLivreur = ? where idLivreur = ?  ";
+            String request = "UPDATE Livreur Set NomLivreur = ?,prenomLivreur = ?,telLivreur =? where idLivreur = ?  ";
             PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
-            pst.setInt(1,glv.getIdLivreur());
      
-           pst.setString(2,glv.getNomLivreur());
+           pst.setString(1,glv.getNomLivreur());
            
-           pst.setString(3,glv.getPrenomLivreur());
+           pst.setString(2,glv.getPrenomLivreur());
            
-           pst.setInt(4,glv.getTelLivreur());
+           pst.setInt(3,glv.getTelLivreur());
+                       pst.setInt(4,glv.getIdLivreur());
+
            
             pst.executeUpdate();
+            
            System.out.println("Livreur modifié! ");
   
       }
@@ -68,8 +70,8 @@ import java.util.List;
             System.err.println(ex.getMessage());
        }}
     public void deleteLivreur(int IdLivreur) {
-        try {
-            String request = "DELETE FROM GestionLIVREUR  where IdLivreur = ?  ";
+         try {
+            String request = "DELETE FROM Livreur  where IdLivreur = ?  ";
             PreparedStatement pst = (PreparedStatement) MyConnection.getInstance().getCnx().prepareStatement(request);
             pst.setInt(1, IdLivreur);
             
@@ -79,17 +81,18 @@ import java.util.List;
       }
         catch (SQLException ex) {
             System.err.println(ex.getMessage());
-       }}
+       }
+     }
 
-   public List<GestionLIVREUR> DisplayLivreur() {
-        List<GestionLIVREUR> myList = new ArrayList();
+   public List<Livreur> DisplayLivreur() {
+        List<Livreur> myList = new ArrayList();
         try {
-            String request = "Select * from GestionLIVREUR";
+            String request = "Select * from Livreur";
             Statement st = MyConnection.getInstance().getCnx().createStatement();
             ResultSet res = st.executeQuery(request);
 
             while (res.next()) {
-                GestionLIVREUR glv = new GestionLIVREUR();
+                Livreur glv = new Livreur();
                glv.setIdLivreur(res.getInt(1));
                 glv.setNomLivreur(res.getString(2));
                 glv.setPrenomLivreur(res.getString(3));

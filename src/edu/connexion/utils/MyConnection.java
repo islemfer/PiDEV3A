@@ -4,6 +4,7 @@ package edu.connexion.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class MyConnection {
@@ -15,7 +16,7 @@ public class MyConnection {
     public Connection cnx;
     public static MyConnection instance;
 
-    private MyConnection() {
+    public MyConnection() {
         try {
             cnx = DriverManager.getConnection(url, login, pwd);
             System.out.println("Connexion établie!");
@@ -33,6 +34,10 @@ public class MyConnection {
             instance = new MyConnection();
         }
         return instance;
+    }
+
+    public Statement createStatment() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
