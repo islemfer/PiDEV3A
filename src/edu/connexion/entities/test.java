@@ -12,4 +12,7 @@ package edu.connexion.entities;
  */
 public class test {
     
+    public void test2()
+    {}
+    
 }
