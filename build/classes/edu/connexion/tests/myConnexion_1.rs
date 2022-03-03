@@ -1,1 +1,0 @@
-edu.connexion.tests.myConnexion

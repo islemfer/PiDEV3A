@@ -57,10 +57,10 @@ import javax.swing.text.Document;
      {
          System.out.println(e3);
     }
-     }}}
+    
 
 
-/*{Scanner clavier=new Scanner(System.in);
+Scanner clavier=new Scanner(System.in);
         double HT=0,tva=0,r=0,netc=0,ttc=0;
         System.out.println("entrer N");
            int n=clavier.nextInt();
@@ -79,9 +79,10 @@ import javax.swing.text.Document;
     System.out.println("le montant est" +HT+"dinars");
     System.out.println("La remise 1% est"+r+"dinars");
     System.out.println("net commercial est"+netc+"dinars");
-    System.out.println("TVA est"+tva+"dinars");*/
+    System.out.println("TVA est"+tva+"dinars");
 
-     //}}}}
+     }}}
+
   
 
 

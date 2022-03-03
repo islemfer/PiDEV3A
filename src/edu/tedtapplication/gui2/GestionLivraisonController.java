@@ -11,6 +11,7 @@ import edu.connexion.services.LivraisonCRUD;
 import edu.connexion.services.LivreurCRUD;
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -30,6 +37,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javax.swing.JTable;
+
+
+
 
 /**
  * FXML Controller class
@@ -66,6 +77,8 @@ String action;
     private Button save;
     @FXML
     private Label erreur;
+    @FXML
+    private Button imprimbtn;
 
     /**
      * Initializes the controller class.
@@ -191,5 +204,33 @@ String action;
         }
         
     }
-        
+
+    @FXML
+    private void printtliv(ActionEvent event) {
+         PrinterJob job = PrinterJob.createPrinterJob();
+
+        Node root = this.tabLivraison;
+
+        if (job != null) {
+            job.showPrintDialog(root.getScene().getWindow()); // Window must be your main Stage
+            Printer printer = job.getPrinter();
+            PageLayout pageLayout = printer.createPageLayout(Paper.A3, PageOrientation.LANDSCAPE, Printer.MarginType.HARDWARE_MINIMUM);
+            boolean success = job.printPage(pageLayout, root);
+            if (success) {
+                job.endJob();
     }
+       
+         refreshLivraison();
+        }}}
+
+    
+
+
+    
+         
+    
+
+   
+
+        
+    
