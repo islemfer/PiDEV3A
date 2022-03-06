@@ -6,6 +6,7 @@
 package edu.connexion.services;
 
 import edu.connexion.entities.Livraison;
+import edu.connexion.entities.Livreur;
 import edu.connexion.utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -94,9 +95,31 @@ public class LivraisonCRUD {
         }
         return myList;
     }
+  public List<Livreur> DisplayLivraison2() {
+        List<Livreur> myList = new ArrayList();
+        try {
+            String request = "SELECT Livreur.IdLivreur FROM Livreur,Livraison WHERE Livreur.IdLivreur=Livraison.IdLivreur";
+            Statement st = MyConnection.getInstance().getCnx().createStatement();
+            ResultSet res = st.executeQuery(request);
+
+            while (res.next()) {
+                Livreur gl = new Livreur();
+                gl.setIdLivreur(res.getInt(1));  
+             
+
+                myList.add(gl);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return myList;
+    }
+
 
     
 }
+
 
 
 

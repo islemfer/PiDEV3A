@@ -60,29 +60,7 @@ import javax.swing.text.Document;
     
 
 
-Scanner clavier=new Scanner(System.in);
-        double HT=0,tva=0,r=0,netc=0,ttc=0;
-        System.out.println("entrer N");
-           int n=clavier.nextInt();
-           for(int i=0;i<n;i++){
-            System.out.println("Entrer prix");
-            double prix=clavier.nextDouble();
-            HT+=prix;}
-        if(HT>100){
-        r=HT*0.1; 
-        netc=HT-r;
-        }
-        tva=netc*0.2;
-        ttc=netc+tva;
-        
-       
-    System.out.println("le montant est" +HT+"dinars");
-    System.out.println("La remise 1% est"+r+"dinars");
-    System.out.println("net commercial est"+netc+"dinars");
-    System.out.println("TVA est"+tva+"dinars");
-
      }}}
-
   
 
 

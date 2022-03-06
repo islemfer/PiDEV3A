@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -30,6 +31,7 @@ import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -37,7 +39,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.util.StringConverter;
 import javax.swing.JTable;
+import javafx.util.StringConverter;
+
 
 
 
@@ -54,8 +59,6 @@ String action;
     @FXML
     private TableColumn<Livraison, Integer> idlivraison;
     @FXML
-    private TableColumn<Livraison, Integer> idlivreur;
-    @FXML
     private TableColumn<Livraison, Double> prixLiv;
     @FXML
     private Button add;
@@ -70,7 +73,7 @@ String action;
     @FXML
     private TextField idinput;
     @FXML
-    private TextField idliv;
+    private ChoiceBox<Livreur> idliv;
     @FXML
     private TextField pricliv;
     @FXML
@@ -78,23 +81,38 @@ String action;
     @FXML
     private Label erreur;
     @FXML
-    private Button imprimbtn;
+    private Button imprimerliv;
+     @FXML
+    private TableColumn<Livraison, Integer> idLivreur;
+      @FXML
+    private TableColumn<Livraison, Double> prixapresRemise;
 
     /**
      * Initializes the controller class.
      */
+    ObservableList<Livreur>Listdata = FXCollections.observableArrayList();
+    ObservableList<Object> listdata = FXCollections.observableArrayList();
+   
+   
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
        formliv.setOpacity(0);
+ LivraisonCRUD l = new LivraisonCRUD();
+        for (Livreur lv : l.DisplayLivraison2()) {
+            Listdata.add(lv);
+        }
+        idliv.setItems(Listdata);
+        System.out.print(Listdata);
 
-
-        ObservableList<Object> listdata = FXCollections.observableArrayList();
-        // pour tableview naccepte ke les  observableliste
+        // pour tabiew naccepte ke les  observableliste
         
          
          
         idlivraison.setCellValueFactory(new PropertyValueFactory<>("IdLivraison"));
-        idlivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
+       idLivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
         prixLiv.setCellValueFactory(new PropertyValueFactory<>("FraisdeLivraison"));
         LivraisonCRUD lc = new LivraisonCRUD();
         listdata.addAll(lc.DisplayLivraison());
@@ -104,7 +122,7 @@ String action;
         ObservableList selectedCells = tabLivraison.getSelectionModel().getSelectedCells();
         selectedCells.addListener(new ListChangeListener() {
             @Override
-            public void onChanged(Change c) {
+            public void onChanged(ListChangeListener.Change c) {
                 Livraison livselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem();
                 if(livselected!=null){
                   edit.setDisable(false);
@@ -121,7 +139,7 @@ String action;
     public void refreshLivraison(){
       ObservableList<Object> listdata = FXCollections.observableArrayList();
       idlivraison.setCellValueFactory(new PropertyValueFactory<>("IdLivraison"));
-        idlivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
+        idLivreur.setCellValueFactory(new PropertyValueFactory<>("IdLivreur"));
         prixLiv.setCellValueFactory(new PropertyValueFactory<>("FraisdeLivraison"));
         LivraisonCRUD lc = new LivraisonCRUD();
                listdata.addAll(lc.DisplayLivraison());
@@ -148,7 +166,7 @@ String action;
          action="add";
          idinput.setText("");
          pricliv.setText("");
-         idliv.setText("");
+         //idliv.setText("");
          
         
     }
@@ -161,7 +179,7 @@ String action;
         action="Edit";
         idinput.setText(String.valueOf(livselected.getIdLivraison()));
         pricliv.setText(String.valueOf(livselected.getFraisdeLivraison()));
-        idliv.setText(String.valueOf(livselected.getIdLivreur()));
+        idliv.setValue(idliv.getValue());
 
         idinput.setDisable(true);
         
@@ -179,7 +197,7 @@ String action;
 
     @FXML
     private void savebutton(ActionEvent event) {
-        if(idinput.getText().compareTo("")==0||pricliv.getText().compareTo("")==0||idliv.getText().compareTo("")==0){
+        if(idinput.getText().compareTo("")==0||pricliv.getText().compareTo("")==0||idliv.getValue()==null){
         erreur.setText("erreur");
         } //si les inputs far8in affichi erreur
         else{
@@ -189,13 +207,13 @@ String action;
 
             //si l'action est ajouter 
             if(action.compareTo("add")==0){
-            Livraison l =new Livraison(Integer.valueOf(idinput.getText()),Integer.valueOf(idliv.getText()),Double.valueOf(pricliv.getText()));
+            Livraison l =new Livraison(Integer.valueOf(idinput.getText()),Integer.valueOf(idliv.getValue().getIdLivreur()),Double.valueOf(pricliv.getText()));
             lc.addLivraison(l);
             }else{
                 //si l'action est modification
               Livraison livraisonselected = (Livraison) tabLivraison.getSelectionModel().getSelectedItem(); //livraison selected from tableview
               livraisonselected.setFraisdeLivraison(Double.valueOf(pricliv.getText())); //modifier 
-              livraisonselected.setIdLivreur(Integer.valueOf(idliv.getText())); //modifier
+              livraisonselected.setIdLivreur(Integer.valueOf(idliv.getValue().getIdLivreur())); //modifier
              lc.updateLivraison(livraisonselected);
              
             }
@@ -205,6 +223,10 @@ String action;
         
     }
 
+  
+ 
+    
+    
     @FXML
     private void printtliv(ActionEvent event) {
          PrinterJob job = PrinterJob.createPrinterJob();
@@ -221,16 +243,33 @@ String action;
     }
        
          refreshLivraison();
-        }}}
+        }}
 
     
 
-
     
-         
-    
-
-   
-
+}
+/*{Scanner clavier=new Scanner(System.in);
+        double HT=0,tva=0,r=0,netc=0,ttc=0;
+        System.out.println("entrer N");
+           int n=clavier.nextInt();
+           for(int i=0;i<n;i++){
+            System.out.println("Entrer prix");
+            double prix=clavier.nextDouble();
+            HT+=prix;}
+        if(HT>100){
+        r=HT*0.1; 
+        netc=HT-r;
+        }
+        tva=netc*0.2;
+        ttc=netc+tva;
         
+       
+    System.out.println("le montant est" +HT+"dinars");
+    System.out.println("La remise 1% est"+r+"dinars");
+    System.out.println("net commercial est"+netc+"dinars");
+    System.out.println("TVA est"+tva+"dinars");*/
+
+     //}}}}
+
     

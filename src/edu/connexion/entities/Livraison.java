@@ -17,8 +17,14 @@ public class Livraison {
     //private String adresse;
     private double FraisdeLivraison;
 
-    public Livraison() {
+    public Livraison() {}
+        public Livraison(int IdLivraison, double FraisdeLivraison) {
+        this.IdLivraison = IdLivraison;
+         
+        
+        this.FraisdeLivraison = FraisdeLivraison;
     }
+    
 
     public Livraison(int IdLivraison,int IdLivreur, double FraisdeLivraison) {
         this.IdLivraison = IdLivraison;
@@ -26,7 +32,6 @@ public class Livraison {
         
         this.FraisdeLivraison = FraisdeLivraison;
     }
-
 
     public int getIdLivraison() {
         return IdLivraison;
@@ -44,7 +49,6 @@ public class Livraison {
         this.IdLivreur = IdLivreur;
     }
 
-  
     public double getFraisdeLivraison() {
         return FraisdeLivraison;
     }
@@ -55,11 +59,11 @@ public class Livraison {
 
     @Override
     public String toString() {
-        return "GestiondeLivraison{" + "IdLivraison=" + IdLivraison + ", IdLivreur=" + IdLivreur + ", FraisdeLivraison=" + FraisdeLivraison + '}';
+        return "Livraison{" + "IdLivraison=" + IdLivraison + ", IdLivreur=" + IdLivreur + ", FraisdeLivraison=" + FraisdeLivraison + '}';
     }
-
-        
 }
+
+
 
     
 
